@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Progressive Wave</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #f8ff00, #ff5e00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(255, 94, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Контейнер для пластинки */
+        .record-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 40px auto;
+            transition: transform 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .record-container {
+                width: 400px;
+                height: 400px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .record-container {
+                width: 500px;
+                height: 500px;
+            }
+        }
+
+        /* Сама пластинка */
+        .record {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #222 0%, #111 70%, #000 100%);
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 0 30px rgba(0, 0, 0, 0.8),
+                inset 0 0 50px rgba(0, 0, 0, 0.9);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 8px solid #333;
+            overflow: hidden;
+        }
+
+        .record:hover {
+            transform: scale(1.05);
+            box-shadow:
+                0 0 50px rgba(255, 94, 0, 0.5),
+                0 0 30px rgba(0, 0, 0, 0.9),
+                inset 0 0 60px rgba(0, 0, 0, 0.9);
+        }
+
+        .record:active {
+            transform: scale(0.98);
+        }
+
+        /* Надпись по окружности у края пластинки */
+        .circular-text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .circular-text svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .circular-text path {
+            fill: #fff;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 10px;
+            text-shadow: 0 0 8px rgba(255, 94, 0, 0.9);
+            paint-order: stroke fill;
+        }
+
+        @media (min-width: 768px) {
+            .circular-text path {
+                font-size: 28px;
+                letter-spacing: 12px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .circular-text path {
+                font-size: 34px;
+                letter-spacing: 14px;
+            }
+        }
+
+        /* Концентрические круги на пластинке */
+        .record::before {
+            content: '';
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            top: 7.5%;
+            left: 7.5%;
+        }
+
+        .record::after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            top: 15%;
+            left: 15%;
+        }
+
+        /* Внешнее кольцо для надписи */
+        .record-outer-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 15px solid transparent;
+            box-shadow:
+                inset 0 0 0 2px rgba(255, 255, 255, 0.1),
+                0 0 0 2px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Центральная наклейка пластинки */
+        .record-center {
+            position: absolute;
+            width: 25%;
+            height: 25%;
+            background: linear-gradient(135deg, #ff5e00, #f8ff00);
+            border-radius: 50%;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 0 20px rgba(255, 94, 0, 0.8),
+                inset 0 0 10px rgba(255, 255, 255, 0.3);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .record-center::after {
+            content: '';
+            position: absolute;
+            width: 20%;
+            height: 20%;
+            background: #000;
+            border-radius: 50%;
+            z-index: 6;
+        }
+
+        .record-center-text {
+            position: relative;
+            z-index: 7;
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.2;
+            text-transform: uppercase;
+            padding: 0 5px;
+        }
+
+        @media (min-width: 768px) {
+            .record-center-text {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .record-center-text {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Инструкция в центре */
+        .center-instruction {
+            position: absolute;
+            z-index: 8;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.8rem;
+            text-align: center;
+            width: 60%;
+            line-height: 1.4;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+        }
+
+        @media (min-width: 768px) {
+            .center-instruction {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .center-instruction {
+                font-size: 1rem;
+            }
+        }
+
+        /* Анимация вращения при нажатии */
+        .record-playing {
+            animation: rotate 3s linear infinite;
+        }
+
+        .circular-text-playing {
+            animation: rotate-reverse 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotate-reverse {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+
+        /* Дорожки на пластинке */
+        .record-grooves {
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .record-grooves div {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .groove-1 {
+            width: 100%;
+            height: 100%;
+        }
+
+        .groove-2 {
+            width: 90%;
+            height: 90%;
+        }
+
+        .groove-3 {
+            width: 80%;
+            height: 80%;
+        }
+
+        .groove-4 {
+            width: 70%;
+            height: 70%;
+        }
+
+        .groove-5 {
+            width: 60%;
+            height: 60%;
+        }
+
+        .groove-6 {
+            width: 50%;
+            height: 50%;
+        }
+
+        .groove-7 {
+            width: 40%;
+            height: 40%;
+        }
+
+        /* Статус радио */
+        .status {
+            margin-top: 40px;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status i {
+            color: #ff5e00;
+        }
+
+        .playing .status i {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        /* Футер */
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .circular-text path {
+                font-size: 16px;
+                letter-spacing: 6px;
+            }
+
+            .status {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+
+            .center-instruction {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Центральная надпись на пластинке */
+        .record-center-text {
+            position: absolute;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            z-index: 20;
+            font-size: 0.9rem;
+            line-height: 1.3;
+            padding: 0 10px;
+        }
+
+        @media (min-width: 768px) {
+            .record-center-text {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .record-center-text {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>The Progressive Wave</h1>
+            <p>Нажмите на пластинку, чтобы включить прямое радио-вещание</p>
+        </div>
+
+        <div class="record-container">
+            <div class="record" id="recordButton">
+                <!-- Внешнее кольцо -->
+                <div class="record-outer-ring"></div>
+
+                <!-- Надпись "MY RADIO" по самому краю пластинки -->
+                <div class="circular-text" id="circularText">
+                    <svg viewBox="0 0 100 100">
+                        <defs>
+                            <!-- Большой радиус для края пластинки -->
+                            <path id="circlePath" d="M 50, 50 m -48, 0 a 48,48 0 1,1 96,0 a 48,48 0 1,1 -96,0" />
+                        </defs>
+                        <text>
+                            <textPath href="#circlePath" startOffset="0%">
+                                ★ ★ ★ ★ MY RADIO ★ MY RADIO ★ MY RADIO ★ ★ ★ ★
+                            </textPath>
+                        </text>
+                    </svg>
+                </div>
+
+                <!-- Дорожки пластинки -->
+                <div class="record-grooves">
+                    <div class="groove-1"></div>
+                    <div class="groove-2"></div>
+                    <div class="groove-3"></div>
+                    <div class="groove-4"></div>
+                    <div class="groove-5"></div>
+                    <div class="groove-6"></div>
+                    <div class="groove-7"></div>
+                </div>
+
+                <!-- Центральная часть пластинки -->
+                <div class="record-center">
+                    <!-- <div class="record-center-text">
+                        НАЖМИ<br>ДЛЯ<br>ЗВУКА
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="status" id="status">
+            <i class="fas fa-pause"></i>
+            <span id="statusText">Радио выключено. Нажмите на пластинку</span>
+        </div>
+
+        <div class="footer">
+            <p>The Progressive Wave &copy; 2025 | Прямая трансляция | Сделано с ❤️ для любителей музыки</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const recordButton = document.getElementById('recordButton');
+            const circularText = document.getElementById('circularText');
+            const statusText = document.getElementById('statusText');
+            const statusIcon = document.querySelector('#status i');
+            const body = document.body;
+
+            let isPlaying = false;
+            let audio = null;
+
+            // Функция для воспроизведения/паузы
+            function togglePlay() {
+                isPlaying = !isPlaying;
+
+                if (isPlaying) {
+                    // Создаем аудио элемент с вашей ссылкой
+                    audio = new Audio('https://myradio24.org/25968');
+                    audio.play().then(() => {
+                        // Включаем воспроизведение
+                        recordButton.classList.add('record-playing');
+                        circularText.classList.add('circular-text-playing');
+                        statusText.textContent = 'Идет трансляция...';
+                        statusIcon.className = 'fas fa-play';
+                        body.classList.add('playing');
+                    }).catch(error => {
+                        console.error('Ошибка воспроизведения:', error);
+                        statusText.textContent = 'Ошибка подключения. Попробуйте еще раз';
+                        isPlaying = false;
+                    });
+                } else {
+                    // Останавливаем воспроизведение
+                    if (audio) {
+                        audio.pause();
+                        audio = null;
+                    }
+
+                    recordButton.classList.remove('record-playing');
+                    circularText.classList.remove('circular-text-playing');
+                    statusText.textContent = 'Радио выключено. Нажмите на пластинку';
+                    statusIcon.className = 'fas fa-pause';
+                    body.classList.remove('playing');
+                }
+            }
+
+            // Обработчик клика по пластинке
+            recordButton.addEventListener('click', togglePlay);
+
+            // Имитация звуковых эффектов при нажатии
+            recordButton.addEventListener('mousedown', function () {
+                this.style.transform = 'scale(0.98)';
+            });
+
+            recordButton.addEventListener('mouseup', function () {
+                this.style.transform = 'scale(1.05)';
+            });
+
+            recordButton.addEventListener('mouseleave', function () {
+                if (!isPlaying) {
+                    this.style.transform = 'scale(1)';
+                }
+            });
+
+            // Добавляем поддержку клавиатуры
+            document.addEventListener('keydown', function (event) {
+                // Пробел для воспроизведения/паузы
+                if (event.code === 'Space') {
+                    event.preventDefault();
+                    togglePlay();
+                }
+            });
+
+            // Информация о управлении
+            setTimeout(() => {
+                console.log('Управление радио:');
+                console.log('- Нажмите на пластинку или пробел для воспроизведения/паузы');
+                console.log('- Прямая трансляция с: https://myradio24.org/25968');
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>
