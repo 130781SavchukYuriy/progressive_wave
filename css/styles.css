@@ -5,14 +5,25 @@
   box-sizing: border-box;
 }
 
+/* Основные стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* АБСОЛЮТНЫЙ ПУТЬ от корня проекта */
   background-image: url(https://media-lab-studio.github.io/eternalrock/img/rockсollage.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
+
+  /* Темный оверлей поверх изображения */
   background-color: rgba(0, 0, 0, 0.85);
+
   color: #fff;
   min-height: 100vh;
   display: flex;
@@ -23,6 +34,7 @@ body {
   padding: 20px;
 }
 
+/* Или более сильный оверлей через псевдоэлемент */
 body::before {
   content: "";
   position: fixed;
@@ -61,43 +73,14 @@ body::before {
 }
 
 .header h1 {
-  font-family: "Metal Mania", "Arial Black", "Impact", sans-serif;
-  font-size: 3.5rem;
-  font-weight: bold;
-  margin: 15px 0;
-  padding: 0;
-  letter-spacing: 2px;
-  background: linear-gradient(
-    45deg,
-    #ff8c00 0%,
-    #ffa500 25%,
-    #ffd700 50%,
-    #daa520 75%,
-    #b8860b 100%
-  );
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  background: linear-gradient(to right, #f8ff00, #ff5e00);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  position: relative;
-  padding-bottom: 15px;
-}
-
-.header h1::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 25%;
-  width: 50%;
-  height: 2px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    #ff8c00,
-    #ffd700,
-    #b8860b,
-    transparent
-  );
+  text-shadow: 0 0 20px rgba(255, 94, 0, 0.4);
+  letter-spacing: 1px;
 }
 
 .header p {
@@ -113,7 +96,7 @@ body::before {
 
 .info p {
   font-size: 0.9rem;
-  opacity: 0.7;
+  opacity: 0.7; /* Увеличьте с 0.4! */
   color: #a0a0ff;
   margin: 0;
 }
@@ -127,7 +110,7 @@ body::before {
   transition: transform 0.3s ease;
 }
 
-/* пластинка */
+/* Сама пластинка */
 .record {
   width: 100%;
   height: 100%;
@@ -189,17 +172,17 @@ body::before {
   transition: all 0.5s ease;
 }
 
-/* Иконка черепа */
+/* Иконка смайлик */
 .skull-icon {
-  width: 70%;
-  height: 70%;
+  width: 120%;
+  height: 120%;
   object-fit: contain;
   filter: drop-shadow(0 0 8px rgba(255, 94, 0, 0.7));
   transition: all 0.5s ease;
   z-index: 11;
 }
 
-/* Свечение черепа */
+/* Свечение смайлика */
 .skull-glow {
   position: absolute;
   width: 100%;
@@ -456,8 +439,6 @@ body::before {
   border-radius: 15px;
   margin-top: 20px;
   text-align: left;
-  width: 100%; /* Растягиваем на всю ширину контейнера */
-  box-sizing: border-box; /* Учитываем padding в общей ширине */
 }
 
 .station-info p {
@@ -469,120 +450,9 @@ body::before {
   gap: 10px;
 }
 
-/* Для параграфов внутри station-info - убираем отступы и делаем flex */
-.station-info p {
-  margin: 10px 0;
-  font-size: 1rem;
-  opacity: 0.9;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%; /* Каждый параграф на всю ширину */
-}
-
-/* Для иконок в station-info */
 .station-info i {
   color: #ff5e00;
   width: 20px;
-  text-align: center;
-  flex-shrink: 0; /* Запрещаем иконкам сжиматься */
-}
-
-/* Для текста жанра - делаем его гибким */
-.station-info p:nth-child(2) {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap; /* Позволяем переносить на новую строку при необходимости */
-}
-
-/* Стили для названия плейлиста */
-#playlist-name {
-  color: #ff9d5c;
-  font-weight: normal;
-  font-size: inherit; /* Наследуем размер шрифта */
-  text-transform: none; /* Убираем верхний регистр */
-  margin-left: 5px;
-  flex: 1; /* Занимает все доступное пространство */
-  min-width: 0; /* Позволяет сжиматься */
-  overflow-wrap: break-word; /* Позволяет переносить длинные слова */
-  word-break: break-word; /* Переносит длинные слова */
-}
-
-/* Для мобильных устройств - адаптивные стили */
-@media (max-width: 768px) {
-  .station-info {
-    padding: 15px;
-    margin-top: 15px;
-  }
-
-  .station-info p {
-    font-size: 0.9rem;
-    gap: 8px;
-    flex-wrap: wrap; /* Позволяем переносить на мобильных */
-  }
-
-  #playlist-name {
-    margin-left: 0;
-    margin-top: 2px;
-    width: 100%; /* На мобильных занимает всю строку */
-  }
-}
-
-@media (max-width: 480px) {
-  .station-info {
-    padding: 12px;
-    margin-top: 12px;
-  }
-
-  .station-info p {
-    font-size: 0.85rem;
-    gap: 6px;
-  }
-}
-
-.station-info i {
-  color: #ff5e00;
-  width: 20px;
-}
-
-/* Стили для названия плейлиста */
-#playlist-name {
-  color: #ff9d5c;
-  font-weight: bold;
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  text-shadow: 0 2px 8px rgba(255, 94, 0, 0.3);
-  padding: 3px 8px;
-  border-radius: 5px;
-  background: rgba(255, 94, 0, 0.1);
-  border: 1px solid rgba(255, 94, 0, 0.2);
-  transition: all 0.3s ease;
-  display: inline-block;
-  margin-left: 5px;
-}
-
-.station-info p:hover #playlist-name {
-  background: rgba(255, 94, 0, 0.2);
-  border-color: rgba(255, 94, 0, 0.4);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 94, 0, 0.2);
-}
-
-/* Анимация обновления плейлиста */
-.playlist-update {
-  animation: playlistUpdate 0.5s ease-out;
-}
-
-@keyframes playlistUpdate {
-  0% {
-    opacity: 0;
-    transform: translateY(-3px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Футер */
@@ -647,8 +517,8 @@ body::before {
     width: 150px;
   }
 
-  #playlist-name {
-    font-size: 1rem;
+  body {
+    background-attachment: scroll;
   }
 }
 
@@ -950,12 +820,80 @@ body::before {
   white-space: nowrap;
 }
 
+/* ========== ПРОСТОЙ ЗОЛОТОЙ ЗАГОЛОВОК ========== */
+
+.header h1 {
+  font-family: "Metal Mania", "Arial Black", "Impact", sans-serif;
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin: 15px 0;
+  padding: 0;
+  letter-spacing: 2px;
+
+  /* Перелив от оранжевого к темно-желтому */
+  background: linear-gradient(
+    45deg,
+    #ff8c00 0%,
+    /* темный оранжевый */ #ffa500 25%,
+    /* оранжевый */ #ffd700 50%,
+    /* золотой */ #daa520 75%,
+    /* золотисто-коричневый */ #b8860b 100% /* темное золото */
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Декоративная линия под заголовком с таким же градиентом */
+.header h1 {
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.header h1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #ff8c00,
+    #ffd700,
+    #b8860b,
+    transparent
+  );
+}
+
 /* Подключаем шрифт */
 @import url("https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap");
 
 /* Альтернативные шрифты если Metal Mania не загрузился */
 .header h1 {
   font-family: "Metal Mania", "Arial Black", sans-serif;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+  }
+
+  .header h1::after {
+    width: 70%;
+    left: 15%;
+  }
 }
 
 /* Простое исправление для мобильных */
@@ -967,8 +905,8 @@ body::before {
     text-align: center;
     gap: 8px;
     padding: 15px;
-    overflow: hidden;
-    box-sizing: border-box;
+    overflow: hidden; /* Добавлено */
+    box-sizing: border-box; /* Добавлено */
     width: 100%;
     max-width: 100%;
   }
@@ -976,22 +914,22 @@ body::before {
   .status > * {
     width: 100%;
     text-align: center;
-    box-sizing: border-box;
-    overflow: hidden;
+    box-sizing: border-box; /* Добавлено */
+    overflow: hidden; /* Добавлено для дочерних элементов */
   }
 
   .marquee-container {
     width: 100%;
-    max-width: 100%;
+    max-width: 100%; /* Добавлено */
     margin: 10px 0;
-    overflow: hidden;
+    overflow: hidden; /* Добавлено */
     box-sizing: border-box;
   }
 
   .marquee-track {
     animation: marquee 10s linear infinite;
     font-size: 0.9rem;
-    max-width: 100%;
+    max-width: 100%; /* Добавлено */
     box-sizing: border-box;
   }
 }
@@ -1009,8 +947,8 @@ body::before {
 
   .marquee-track {
     font-size: 0.85rem;
-    animation-duration: 8s !important;
-    padding-left: 50%;
+    animation-duration: 8s !important; /* Быстрее для коротких экранов */
+    padding-left: 50%; /* Уменьшаем начальный отступ */
   }
 }
 
