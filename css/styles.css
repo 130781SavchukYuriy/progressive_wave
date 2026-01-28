@@ -808,6 +808,114 @@ body::before {
   opacity: 0.6;
 }
 
+/* ========== СТИЛИ ДЛЯ СЛЕДУЮЩЕГО ТРЕКА ========== */
+
+.next-track-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 25px;
+    width: 100%;
+    max-width: 600px;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.next-track-container:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.next-track-label {
+    color: #ff9d5c;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+}
+
+.next-track-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    text-align: left;
+    min-width: 0;
+    font-size: 0.9rem;
+}
+
+/* Эффект при обновлении следующего трека */
+.next-track-update {
+    animation: nextTrackUpdate 0.5s ease-out;
+}
+
+@keyframes nextTrackUpdate {
+    0% {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность для следующего трека */
+@media (max-width: 768px) {
+    .next-track-container {
+        padding: 8px 12px;
+        gap: 8px;
+        font-size: 0.9rem;
+        border-radius: 20px;
+        margin-top: 8px;
+        margin-bottom: 15px;
+    }
+    
+    .next-track-label {
+        font-size: 0.85rem;
+    }
+    
+    .next-track-text {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .next-track-container {
+        padding: 6px 10px;
+        gap: 6px;
+        font-size: 0.85rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .next-track-label {
+        font-size: 0.8rem;
+    }
+    
+    .next-track-text {
+        font-size: 0.8rem;
+        width: 100%;
+        text-align: left;
+    }
+}
+
+@media (max-width: 360px) {
+    .next-track-container {
+        display: none; /* Скрываем на очень маленьких экранах */
+    }
+}
+
+
 /* ========== МЕДИА-ЗАПРОСЫ ДЛЯ МОБИЛЬНЫХ ========== */
 
 @media (max-width: 768px) {
