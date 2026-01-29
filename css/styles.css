@@ -1,13 +1,13 @@
-/* /* Основные стили */
+/* Основные стили */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* body {
+body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-image: url(https://media-lab-studio.github.io/eternalrock/img/rockсollage.png); 
+  background-image: url(https://media-lab-studio.github.io/progressive_wave/img/rockсollage.png); 
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -21,9 +21,9 @@
   justify-content: center;
   overflow-x: hidden;
   padding: 20px;
-} */
+}
 
-/* body::before {
+body::before {
   content: "";
   position: fixed;
   top: 0;
@@ -37,9 +37,9 @@
     rgba(15, 52, 96, 0.9) 100%
   );
   z-index: -1;
-} */
+}
 
-/* .container {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,10 +53,10 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
   border: 1px solid rgba(255, 94, 0, 0.4);
   backdrop-filter: blur(8px);
-} */
+}
 
 /* Шапка */
-/* .header {
+.header {
   margin-bottom: 40px;
 }
 
@@ -81,9 +81,9 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   position: relative;
   padding-bottom: 15px;
-} */
+}
 
-/* .header h1::after {
+.header h1::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -116,7 +116,7 @@
   opacity: 0.7;
   color: #a0a0ff;
   margin: 0;
-} */
+}
 
 /* Контейнер пластинки */
 .record-container {
@@ -128,7 +128,7 @@
 }
 
 /* пластинка */
-/* .record {
+.record {
   width: 100%;
   height: 100%;
   background: radial-gradient(circle, #111 0%, #0a0a0a 70%, #000 100%);
@@ -808,114 +808,6 @@
   opacity: 0.6;
 }
 
-/* ========== СТИЛИ ДЛЯ СЛЕДУЮЩЕГО ТРЕКА ========== */
-
-.next-track-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    padding: 10px 15px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 25px;
-    width: 100%;
-    max-width: 600px;
-    opacity: 0.9;
-    transition: opacity 0.3s ease;
-    font-size: 0.95rem;
-}
-
-.next-track-container:hover {
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.next-track-label {
-    color: #ff9d5c;
-    font-weight: 600;
-    white-space: nowrap;
-    flex-shrink: 0;
-    font-size: 0.9rem;
-}
-
-.next-track-text {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 400;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex: 1;
-    text-align: left;
-    min-width: 0;
-    font-size: 0.9rem;
-}
-
-/* Эффект при обновлении следующего трека */
-.next-track-update {
-    animation: nextTrackUpdate 0.5s ease-out;
-}
-
-@keyframes nextTrackUpdate {
-    0% {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Адаптивность для следующего трека */
-@media (max-width: 768px) {
-    .next-track-container {
-        padding: 8px 12px;
-        gap: 8px;
-        font-size: 0.9rem;
-        border-radius: 20px;
-        margin-top: 8px;
-        margin-bottom: 15px;
-    }
-    
-    .next-track-label {
-        font-size: 0.85rem;
-    }
-    
-    .next-track-text {
-        font-size: 0.85rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .next-track-container {
-        padding: 6px 10px;
-        gap: 6px;
-        font-size: 0.85rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-    }
-    
-    .next-track-label {
-        font-size: 0.8rem;
-    }
-    
-    .next-track-text {
-        font-size: 0.8rem;
-        width: 100%;
-        text-align: left;
-    }
-}
-
-@media (max-width: 360px) {
-    .next-track-container {
-        display: none; /* Скрываем на очень маленьких экранах */
-    }
-}
-
-
 /* ========== МЕДИА-ЗАПРОСЫ ДЛЯ МОБИЛЬНЫХ ========== */
 
 @media (max-width: 768px) {
@@ -1062,7 +954,7 @@
     animation-duration: 18s !important; /* Еще быстрее */
   }
   
-  /* #statusText {
+  #statusText {
     font-size: 0.85rem;
   }
   
@@ -1083,12 +975,12 @@
   }
 }
 
-/* /* Для очень маленьких экранов - упрощаем */
+/* Для очень маленьких экранов - упрощаем */
 @media (max-width: 360px) {
   .status {
     padding: 6px 8px;
     min-height: 44px;
-  } */
+  }
   
   .status-label {
     display: none; /* Скрываем метку на самых маленьких экранах */
@@ -1106,9 +998,9 @@
   .marquee-container {
     width: 100%;
     text-align: center;
-  } */
+  }
   
-  /* /* Минимальный размер для расписания */
+  /* Минимальный размер для расписания */
   .schedule-list li {
     font-size: 0.7rem;
     padding: 4px 0;
@@ -1132,8 +1024,8 @@
     margin-bottom: 10px;
     min-height: 40px;
   }
-   */
+  
   .marquee-container {
     height: 18px;
-  } */
-} */
+  }
+}
